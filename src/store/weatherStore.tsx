@@ -33,12 +33,12 @@ export const useWeatherStore = create < WeatherStore > ((set) => ({
         response.then(((value) => pipe(
             value,
             fold(
-                (errorMessage) => set((state) => ({
+                (errorMessage) => set({
                     currentWeatherState: new WeatherStateFailed(errorMessage)
-                })),
-                (data) => set((state) => ({
+                }),
+                (data) => set({
                     currentWeatherState: new WeatherStateSuccess(data)
-                })),
+                }),
             )
         )))
     }
