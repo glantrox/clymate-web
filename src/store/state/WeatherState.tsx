@@ -1,12 +1,12 @@
-import WeatherModel from "@/models/WeatherModel";
+
 
 class WeatherState {}
 
 export class WeatherStateLoading extends WeatherState {    }
 
 export class WeatherStateSuccess extends WeatherState {
-    data: WeatherModel
-    constructor(data: WeatherModel) {
+    data:CurrentWeatherEntity
+    constructor(data: CurrentWeatherEntity) {
         super()
         this.data = data
     }

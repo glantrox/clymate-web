@@ -1,7 +1,6 @@
 
 import { RemoteDataSource } from "@/app/datasource/remote_datasource";
 import { FetchError, FetchSuccess } from "@/models/FetchStatus";
-import WeatherModel from "@/models/WeatherModel";
 import { Either, right, left } from "fp-ts/lib/Either";
 import * as O from "fp-ts/Option";
 
@@ -12,12 +11,12 @@ class WeatherRepository {
     // Return Function as Promise<Either<Left, Right>>
 
     // Get Weather Details
-    async weatherDetails(): Promise<Either<string, any>> {
+    async weatherDetails(): Promise<Either<string, CurrentWeatherEntity>> {
         const response = await WeatherRepository.RDS.getWeatherDetails();
         if(response instanceof FetchError) {
             return left(response.message);
         } else if (response instanceof FetchSuccess) {
-            return right(response.data);
+            return right(CurrentWeatherEntity.fromModel(response.data as CurrentWeatherModel));
         }        
         return left('Unknown Error Occured');
     }

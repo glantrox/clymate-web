@@ -59,7 +59,7 @@ interface LocationModel {
     localtime: string;
 }
 
-class WeatherModel {
+class CurrentWeatherModel {
     location: LocationModel;
     current: Current;
 
@@ -68,7 +68,7 @@ class WeatherModel {
         this.current = current;
     }
 
-    static fromJSON(json: any): WeatherModel {
+    static fromJSON(json: any): CurrentWeatherModel {
         const location: LocationModel = {
             name: json.location.name,
             region: json.location.region,
@@ -130,6 +130,6 @@ class WeatherModel {
             air_quality: airQuality,
         };
 
-        return new WeatherModel(location, current);
+        return new CurrentWeatherModel(location, current);
     }
 }

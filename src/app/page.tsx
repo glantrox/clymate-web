@@ -1,9 +1,18 @@
+import { useCurrentWeatherStore } from "@/store/currentWeatherStore";
+import { WeatherStateLoading } from "@/store/state/WeatherState";
 import Image from "next/image";
 import { get } from "node:https";
+import { useEffect } from "react";
 
 
 
 export default function Home() {
+  const { currentWeatherState, fetchCurrentWeather } = useCurrentWeatherStore();
+
+  useEffect(() => {
+    fetchCurrentWeather()
+  }, [fetchCurrentWeather]);
+
   return (
     <div
       className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-geist">
@@ -16,13 +25,20 @@ export default function Home() {
               <p className="font-consolas text-[14px] font-bold">Mostly Cloudy</p>
               <img className="w-[130px] h-[130px]" src="/images/weather_example.png" alt="" />
             </div>
-            <h1 className="font-bold text-[70px] leading-[95%] text-right">34 CELSIUS</h1>
-            <div className="info-wrapper flex flex-col font-consolas text-right text-[14px]">
-              <p>Humidity: 12%</p>
-              <p>Cloudy: 12%</p>
-              <p>Wind: 5/kmh</p>
-              <p>Time: 12:00:00</p>
-            </div>
+            {
+            currentWeatherState instanceof WeatherStateLoading ? ( <h1>Loading</h1> ) : ( 
+            <div
+              className="wratherWrapper">
+              <h1 className="font-bold text-[70px] leading-[95%] text-right">34 CELSIUS</h1>
+              <div className="info-wrapper flex flex-col font-consolas text-right text-[14px]">
+                <p>Humidity: 12%</p>
+                <p>Cloudy: 12%</p>
+                <p>Wind: 5/kmh</p>
+                <p>Time: 12:00:00</p>
+              </div>
+            </div> )
+            }
+
           </div>
           {/* RIGHT SIDE */}
           <div className="right-side flex flex-col items-start gap-2 mb-20">
@@ -40,5 +56,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  );
+    );
 }

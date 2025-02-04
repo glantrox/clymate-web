@@ -1,4 +1,3 @@
-import WeatherModel from "@/models/WeatherModel"
 import {
     create
 } from "zustand"
@@ -20,15 +19,15 @@ import {
 
 const weatherRepository = new WeatherRepository();
 
-type WeatherStore = {
+type CurrentWeatherStore = {
     currentWeatherState: WeatherState
-    fetch: () => Promise < void >
+    fetchCurrentWeather: () => Promise < void >
 }
 
 
-export const useWeatherStore = create < WeatherStore > ((set) => ({
+export const useCurrentWeatherStore = create < CurrentWeatherStore > ((set) => ({
     currentWeatherState: new WeatherStateLoading(),
-    fetch: async () => {
+    fetchCurrentWeather: async () => {
         const response = weatherRepository.weatherDetails();
         response.then(((value) => pipe(
             value,
