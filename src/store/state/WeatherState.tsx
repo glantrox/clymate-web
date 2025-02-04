@@ -1,3 +1,4 @@
+import { CurrentWeatherEntity } from "@/app/entitites/WeatherEntity"
 
 
 class WeatherState {}

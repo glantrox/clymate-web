@@ -1,4 +1,5 @@
 import FetchStatus, { FetchError, FetchSuccess } from "@/models/FetchStatus";
+import { CurrentWeatherModel } from "@/models/CurrentWeatherModel"; 
 import axios from "axios";
 
 
@@ -13,9 +14,9 @@ export class RemoteDataSource {
             const position = await this.getCurrentLocation();
             const { latitude, longitude } = position.coords;
           
-            const response = await axios.get(apiUrl + '/current.json', {
+            const response = await axios.get('http://api.weatherapi.com/v1' + '/current.json', {
                 params: {
-                    key: apiKey,
+                    key: 'b45fd4df41fa4f1d8bd55438250202',
                     q: latitude + " " + longitude
                 }
             });
@@ -24,8 +25,9 @@ export class RemoteDataSource {
                 return new FetchError(response.statusText, response.status);
             }
 
-            const data = CurrentWeatherModel.fromJSON(response.data);
-            return new FetchSuccess(response.status, data);
+            const data: CurrentWeatherModel = CurrentWeatherModel.fromJSON(response.data);
+            
+            return new FetchSuccess(response.status, data as CurrentWeatherModel);
         } catch (error) {
             return new FetchError("Function Exception 'getWeatherDetails' : " + error);
         }

@@ -1,4 +1,6 @@
-class CurrentWeatherEntity {
+import { CurrentWeatherModel } from "@/models/CurrentWeatherModel"
+
+export class CurrentWeatherEntity {
     humidityPercentage: string
     cloudPercentage: string
     windPercentage: string
@@ -15,13 +17,13 @@ class CurrentWeatherEntity {
         this.temprature = temprature
     }
 
-    static fromModel(model: CurrentWeatherModel):CurrentWeatherEntity {
+    static fromModel(model: CurrentWeatherModel): CurrentWeatherEntity {
         return new CurrentWeatherEntity(
-            '${model.current.humidity | 0,}',
-            '${model.current.cloud.toString | 0}',
-            '${model.current.wind_kph.toString | 0}',
-            '${model.current.temp_c | 0}'
-        )
+            (model.current.humidity ?? 0).toString(),
+            (model.current.cloud ?? 0).toString(),
+            (model.current.wind_kph ?? 0).toString(),
+            (model.current.temp_c ?? 0).toString()
+        );
     }
 
 

@@ -29,16 +29,18 @@ export const useCurrentWeatherStore = create < CurrentWeatherStore > ((set) => (
     currentWeatherState: new WeatherStateLoading(),
     fetchCurrentWeather: async () => {
         const response = weatherRepository.weatherDetails();
-        response.then(((value) => pipe(
-            value,
-            fold(
-                (errorMessage) => set({
-                    currentWeatherState: new WeatherStateFailed(errorMessage)
-                }),
-                (data) => set({
-                    currentWeatherState: new WeatherStateSuccess(data)
-                }),
+        response.then(((value) => setTimeout(() => {
+            pipe(
+                value,
+                fold(
+                    (errorMessage) => set({
+                        currentWeatherState: new WeatherStateFailed(errorMessage)
+                    }),
+                    (data) => set({
+                        currentWeatherState: new WeatherStateSuccess(data)
+                    }),
+                )
             )
-        )))
+        }, 1500)))
     }
 }));

@@ -1,5 +1,7 @@
 
 import { RemoteDataSource } from "@/app/datasource/remote_datasource";
+import { CurrentWeatherEntity } from "@/app/entitites/WeatherEntity";
+import { CurrentWeatherModel } from "@/models/CurrentWeatherModel";
 import { FetchError, FetchSuccess } from "@/models/FetchStatus";
 import { Either, right, left } from "fp-ts/lib/Either";
 import * as O from "fp-ts/Option";
