@@ -29,14 +29,14 @@ function CurrentWeatherWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.
         <div
           className="card-weather items-center flex flex-col light:bg-gray-200 dark:bg-gray-600 px-20 py-2 w-[70%] ph rounded-md border border-gray-500">
           <p className="font-consolas text-[14px] font-bold">{success.data.weatherCondition}</p>
-          <img className="w-[130px] h-[130px]" src={success.data.conditionIcon} alt="" />
+          <img className="w-[120px] h-[120px] grayscale" src={success.data.conditionIcon} alt="" />
         </div>
         <div className="wratherWrapper">
           <h1 className="font-bold text-[70px] leading-[95%] text-right">{success.data.temprature}°CELSIUS</h1>
           <div className="info-wrapper flex flex-col font-consolas text-right text-[14px]">
-            <p>Humidity: {success.data.humidityPercentage}</p>
-            <p>Cloudy: {success.data.cloudPercentage}</p>
-            <p>Wind: {success.data.windPercentage}</p>
+            <p>Humidity: {success.data.humidityPercentage}%</p>
+            <p>Cloudy: {success.data.cloudPercentage}%</p>
+            <p>Wind: {success.data.windPercentage}km/h</p>
           </div>
         </div>
       </div>

@@ -14,9 +14,9 @@ export class RemoteDataSource {
             const position = await this.getCurrentLocation();
             const { latitude, longitude } = position.coords;
           
-            const response = await axios.get('http://api.weatherapi.com/v1' + '/current.json', {
+            const response = await axios.get(apiUrl + '/current.json', {
                 params: {
-                    key: 'b45fd4df41fa4f1d8bd55438250202',
+                    key: apiKey,
                     q: latitude + " " + longitude
                 }
             });
