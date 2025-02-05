@@ -29,7 +29,9 @@ export class RemoteDataSource {
             
             return new FetchSuccess(response.status, data as CurrentWeatherModel);
         } catch (error) {
-            return new FetchError("Function Exception 'getWeatherDetails' : " + error);
+            const geoError = error as GeolocationPositionError;
+            const message = error instanceof GeolocationPositionError ? geoError.message : error;
+            return new FetchError("Function Exception 'getWeatherDetails\n' : " + message );
         }
     }
 
@@ -38,7 +40,7 @@ export class RemoteDataSource {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(resolve, reject);
             } else {
-                reject(new Error("Geolocation is not supported by this browser."));
+                reject(new Error("Geolocation is not supported by this browser.").message);
             }
         });
     }
