@@ -59,10 +59,10 @@ function ForecastWeatherWidget({ forecastState }: ForeCastWidgetProps) {
     
     // Create an array to hold the list items
     const forecastItems = listOfForecast.map((element, index) => (
-      <ul key={index} className="flex flex-row justify-around space-x-12  font-consolas text-[14px]">                
-        <li className="font-bold text-left">{element.weatherStatus}</li>
-        <li className="font-extralight">{element.temprature}°</li>
-        <li className="font-extralight">{element.date}</li>
+      <ul key={index} className="flex flex-row space-x-7 font-consolas text-[14px]">                
+        <li className="font-bold self-start text-start">{element.weatherStatus}</li>
+        <li className="font-extralight self-center text-center">{element.temprature}°</li>
+        <li className="font-extralight self-end text-end">{element.date}</li>
       </ul>
     ));
 
