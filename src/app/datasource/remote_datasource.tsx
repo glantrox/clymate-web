@@ -33,7 +33,7 @@ export class RemoteDataSource {
         } catch(error) {
             const geoError = error as GeolocationPositionError;
             const message = error instanceof GeolocationPositionError ? geoError.message : error;
-            return new FetchError("Function Exception 'getWeatherDetails\n' : " + message );
+            return new FetchError("Exception - " + message );
         }
     }
 
@@ -60,7 +60,7 @@ export class RemoteDataSource {
         } catch (error) {
             const geoError = error as GeolocationPositionError;
             const message = error instanceof GeolocationPositionError ? geoError.message : error;
-            return new FetchError("Function Exception 'getWeatherDetails\n' : " + message );
+            return new FetchError("Exception - " + message );
         }
     }
 

@@ -5,6 +5,7 @@ import ForecastWeatherState, { FWSFailed, FWSLoading, FWSSuccess } from "@/store
 import WeatherState, { WeatherStateFailed, WeatherStateLoading, WeatherStateSuccess } from "@/store/state/WeatherState";
 import { JSX, useEffect } from "react";
 
+
 interface CurrentWeatherWidgetProps { weatherState: WeatherState;}
 function CurrentDateWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.Element {
   if(weatherState instanceof WeatherStateSuccess) {
@@ -50,31 +51,30 @@ function CurrentWeatherWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.
 }
 
 interface ForeCastWidgetProps {forecastState: ForecastWeatherState}
-function ForecastWeatherWidget({forecastState}: ForeCastWidgetProps) {
+function ForecastWeatherWidget({ forecastState }: ForeCastWidgetProps) {
   if (forecastState instanceof FWSLoading) {
-    return (<h1>Loading Forecast...</h1>)
-  } else if(forecastState instanceof FWSSuccess) {
-    const listOfForecast = forecastState.data.data
-    for (let index = 0; index < listOfForecast.length; index++) {
-      const element = listOfForecast[index];
-      return (        
-        <ul className="flex flex-row justify-around space-x-12 text-right font-consolas text-[14px]">                
-          <li className="font-bold">{element.weatherStatus}</li>
-          <li className="font-extralight">{element.temprature}°</li>
-          <li className="font-extralight">{element.date}</li>
-        </ul>
-      );  
-    }
+    return (<h1>Loading Forecast...</h1>);
+  } else if (forecastState instanceof FWSSuccess) {
+    const listOfForecast = forecastState.data.data;
     
-    
+    // Create an array to hold the list items
+    const forecastItems = listOfForecast.map((element, index) => (
+      <ul key={index} className="flex flex-row justify-around space-x-12  font-consolas text-[14px]">                
+        <li className="font-bold text-left">{element.weatherStatus}</li>
+        <li className="font-extralight">{element.temprature}°</li>
+        <li className="font-extralight">{element.date}</li>
+      </ul>
+    ));
+
+    // Return the array of forecast items
+    return <>{forecastItems}</>;
     
   } else {
-    const failed = forecastState as FWSFailed
-    const errorMessage = failed.message
-    return ( <h1> Error {errorMessage} </h1> )
+    const failed = forecastState as FWSFailed;
+    const errorMessage = failed.message;
+    return (<h1>Error {errorMessage}</h1>);
   }
 }
-
 export default function Home() {
   const { currentWeatherState, fetchCurrentWeather } = useCurrentWeatherStore()
   const { forecastWeatherState, fetchForecast } = useForecastWeatherStore()
@@ -88,7 +88,7 @@ export default function Home() {
     <div
       className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-geist">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div className="content-wrapper flex flex-wrap-reverse gap-2 ">
+        <div className="content-wrapper flex flex-wrap-reverse gap-4 ">
           {/* LEFT SIDE */}
           <div className="left-side flex flex-col items-end gap-2">
             <CurrentWeatherWidget weatherState={currentWeatherState} />
