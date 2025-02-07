@@ -1,9 +1,11 @@
 "use client"; // Mark this file as a client component
 import { useCurrentWeatherStore } from "@/store/currentWeatherStore";
+import { useForecastWeatherStore } from "@/store/forecastWeatherStore";
+import ForecastWeatherState, { FWSFailed, FWSLoading, FWSSuccess } from "@/store/state/ForecastWeathterState";
 import WeatherState, { WeatherStateFailed, WeatherStateLoading, WeatherStateSuccess } from "@/store/state/WeatherState";
 import { JSX, useEffect } from "react";
 
-interface CurrentDateWidgetProps { weatherState: WeatherState;}
+interface CurrentWeatherWidgetProps { weatherState: WeatherState;}
 function CurrentDateWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.Element {
   if(weatherState instanceof WeatherStateSuccess) {
     const success = weatherState as WeatherStateSuccess
@@ -17,8 +19,6 @@ function CurrentDateWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.Ele
     return ( <h1>  </h1> )
   }
 }
-
-interface CurrentWeatherWidgetProps { weatherState: WeatherState;}
 function CurrentWeatherWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.Element {
   if(weatherState instanceof WeatherStateLoading) {
     return ( <h1>Loading...</h1> )
@@ -26,6 +26,7 @@ function CurrentWeatherWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.
     const success = weatherState as WeatherStateSuccess
     return (
       <div className="wrapper flex flex-col gap-5 items-end">
+
         <div
           className="card-weather items-center flex flex-col light:bg-gray-200 dark:bg-gray-600 px-15 py-2 w-[70%] ph rounded-md border border-gray-500">
           <p className="font-consolas text-[14px] font-bold">{success.data.weatherCondition}</p>
@@ -41,19 +42,47 @@ function CurrentWeatherWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.
         </div>
       </div>
      )
-  } else {
+  } else {    
     const failed = weatherState as WeatherStateFailed
     const errorMessage = failed.message
-    return ( <h1> {errorMessage} </h1> )
+    return ( <h1>{errorMessage} </h1> )
+  }
+}
+
+interface ForeCastWidgetProps {forecastState: ForecastWeatherState}
+function ForecastWeatherWidget({forecastState}: ForeCastWidgetProps) {
+  if (forecastState instanceof FWSLoading) {
+    return (<h1>Loading Forecast...</h1>)
+  } else if(forecastState instanceof FWSSuccess) {
+    const listOfForecast = forecastState.data.data
+    for (let index = 0; index < listOfForecast.length; index++) {
+      const element = listOfForecast[index];
+      return (        
+        <ul className="flex flex-row justify-around space-x-12 text-right font-consolas text-[14px]">                
+          <li className="font-bold">{element.weatherStatus}</li>
+          <li className="font-extralight">{element.temprature}°</li>
+          <li className="font-extralight">{element.date}</li>
+        </ul>
+      );  
+    }
+    
+    
+    
+  } else {
+    const failed = forecastState as FWSFailed
+    const errorMessage = failed.message
+    return ( <h1> Error {errorMessage} </h1> )
   }
 }
 
 export default function Home() {
-  const { currentWeatherState, fetchCurrentWeather } = useCurrentWeatherStore();
+  const { currentWeatherState, fetchCurrentWeather } = useCurrentWeatherStore()
+  const { forecastWeatherState, fetchForecast } = useForecastWeatherStore()
 
   useEffect(() => {
     fetchCurrentWeather()
-  }, [fetchCurrentWeather]);
+    fetchForecast()
+  }, [fetchCurrentWeather, fetchForecast]);
 
   return (
     <div
@@ -69,12 +98,9 @@ export default function Home() {
             <CurrentDateWidget weatherState={currentWeatherState} />
             <div className="card-forecast  light:bg-gray-200 dark:bg-gray-600 p-2 rounded-md border border-gray-500">
               <p className="font-consolas text-[14px] font-bold">5-DAYS FORECAST -----------------</p>
-              <ul className="flex flex-row justify-around space-x-12 text-right font-consolas text-[14px]">
-                <li className="font-bold">Cloudy</li>
-                <li className="font-extralight">20°</li>
-                <li className="font-extralight">10th January</li>
-              </ul>
-            </div>
+              {/* PUT THE FOREACH HERE */}
+              <ForecastWeatherWidget forecastState={forecastWeatherState}/>
+          </div>
           </div>
         </div>
       </main>

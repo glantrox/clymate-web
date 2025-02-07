@@ -9,8 +9,8 @@ export class ForecastModel {
       this.forecast = forecast;
     }
       
-    static fromJSON(json: string): ForecastModel {
-      const parsed = JSON.parse(json);
+    static fromJSON(json: any): ForecastModel {
+      const parsed = json
       return new ForecastModel(
         parsed.location,
         parsed.current,
