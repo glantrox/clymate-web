@@ -27,7 +27,7 @@ function CurrentWeatherWidget({ weatherState }: CurrentWeatherWidgetProps): JSX.
     return (
       <div className="wrapper flex flex-col gap-5 items-end">
         <div
-          className="card-weather items-center flex flex-col light:bg-gray-200 dark:bg-gray-600 px-20 py-2 w-[70%] ph rounded-md border border-gray-500">
+          className="card-weather items-center flex flex-col light:bg-gray-200 dark:bg-gray-600 px-15 py-2 w-[70%] ph rounded-md border border-gray-500">
           <p className="font-consolas text-[14px] font-bold">{success.data.weatherCondition}</p>
           <img className="w-[120px] h-[120px] grayscale" src={success.data.conditionIcon} alt="" />
         </div>
@@ -59,7 +59,7 @@ export default function Home() {
     <div
       className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-geist">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div className="content-wrapper flex flex-row gap-2 ">
+        <div className="content-wrapper flex flex-wrap-reverse gap-2 ">
           {/* LEFT SIDE */}
           <div className="left-side flex flex-col items-end gap-2">
             <CurrentWeatherWidget weatherState={currentWeatherState} />
