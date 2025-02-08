@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![foto](https://i.imgur.com/rrFMi8w.png)
 
-## Getting Started
 
-First, run the development server:
+[![Technologies](https://skillicons.dev/icons?i=mysql,nextjs,html,css)](https://skillicons.dev)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Clymate Weather Website
+Clymate Web is a sleek and modern weather application built with Next.js, designed to provide users with real-time weather updates and forecasts. With a responsive and intuitive interface, the application ensures a smooth and user-friendly experience, whether on desktop or mobile. It delivers essential weather details at a glance, making it easy to stay informed about current conditions and upcoming forecasts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application offers a 5-day weather forecast, allowing users to plan ahead with accurate predictions. It also displays current weather conditions, including temperature, humidity, and other key metrics to keep users updated in real time. Additionally, Clymate Web supports both dark and light modes, automatically adjusting based on the user’s system preferences for a comfortable viewing experience.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To ensure reliability, all weather data is sourced from the Weather API, providing accurate and up-to-date information. Whether checking for daily conditions or planning for the week ahead, Clymate Web offers a seamless and efficient way to stay prepared for any weather changes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Application Implementation
+Used Next JS as Back-end and Routing
 
-## Learn More
+### 📷 Snapshots
+![foto](https://github.com/user-attachments/assets/277054fb-90c3-4887-b351-37683449e59f)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 😎 Application Features
+∙ 5 Days Forecast <br>
+∙ Current Weather<br>
+∙ Dark & Light based on System.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📦 Database
+∙ API data Provided from **Weather API** <br>
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
