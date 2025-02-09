@@ -1,7 +1,7 @@
 ![foto](https://i.imgur.com/rrFMi8w.png)
 
 
-[![Technologies](https://skillicons.dev/icons?i=mysql,nextjs,html,css)](https://skillicons.dev)
+[![Technologies](https://skillicons.dev/icons?i=mysql,nextjs,html,tailwind,css)](https://skillicons.dev)
 
 # Clymate Weather Website
 Clymate Web is a sleek and modern weather application built with Next.js, designed to provide users with real-time weather updates and forecasts. With a responsive and intuitive interface, the application ensures a smooth and user-friendly experience, whether on desktop or mobile. It delivers essential weather details at a glance, making it easy to stay informed about current conditions and upcoming forecasts.
